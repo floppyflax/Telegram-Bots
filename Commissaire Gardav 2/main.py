@@ -18,6 +18,8 @@ TOKEN = '135466127:AAFwtvV15E_H9w-4pkV9KEwB9wSDSjAoK9M'
 
 BASE_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
 
+NOM_BOT = 'commissaire_gardav_2_bot'
+
 
 # ================================
 
@@ -115,8 +117,12 @@ class WebhookHandler(webapp2.RequestHandler):
                 setEnabled(chat_id, False)
             elif text == '/toucher_rectal':
                 reply('Baissez votre pantalon s\'il vous plait. Bebert ??? Passe moi les gants en latex !')
+            elif text == '/toucher_rectal@'+NOM_BOT:
+                reply('Baissez votre pantalon s\'il vous plait. Bebert ??? Passe moi les gants en latex !')
             elif text == '/interpellation':
                 reply('Et ca c\'est des boules quies Monsieur ' + fr_nomComplet + '. ? Embarquez-le !')
+            elif text == '/interpellation@'+NOM_BOT:
+                reply('Et ca c\'est des boules quies Monsieur ' + fr_nomComplet + '. ? Embarquez-le !')                
             elif text == '/image':
                 img = Image.new('RGB', (512, 512))
                 base = random.randint(0, 16777216)

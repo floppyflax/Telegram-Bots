@@ -14,7 +14,7 @@ from google.appengine.api import urlfetch
 from google.appengine.ext import ndb
 import webapp2
 
-TOKEN = 'YOUR_BOT_TOKEN_HERE'
+TOKEN = '135466127:AAFwtvV15E_H9w-4pkV9KEwB9wSDSjAoK9M'
 
 BASE_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
 
@@ -76,6 +76,7 @@ class WebhookHandler(webapp2.RequestHandler):
         date = message.get('date')
         text = message.get('text')
         fr = message.get('from')
+        fr_nomComplet = (fr.get('first_name') + ' ' + fr.get('last_name'))
         chat = message['chat']
         chat_id = chat['id']
 
@@ -108,10 +109,14 @@ class WebhookHandler(webapp2.RequestHandler):
         if text.startswith('/'):
             if text == '/start':
                 reply('Bot enabled')
-                setEnabled(chat_id, True)
+                setEnabled(chat_id, True)			
             elif text == '/stop':
                 reply('Bot disabled')
                 setEnabled(chat_id, False)
+            elif text == '/toucher_rectal':
+                reply('Baissez votre pantalon s\'il vous plait. Bebert ??? Passe moi les gants en latex !')
+            elif text == '/interpellation':
+                reply('Et ca c\'est des boules quies Monsieur ' + fr_nomComplet + '. ? Embarquez-le !')
             elif text == '/image':
                 img = Image.new('RGB', (512, 512))
                 base = random.randint(0, 16777216)
@@ -120,8 +125,8 @@ class WebhookHandler(webapp2.RequestHandler):
                 output = StringIO.StringIO()
                 img.save(output, 'JPEG')
                 reply(img=output.getvalue())
-            else:
-                reply('What command?')
+            #else:
+            #    reply('What command?')
 
         # CUSTOMIZE FROM HERE
 
